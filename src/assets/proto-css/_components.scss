@@ -1,0 +1,11 @@
+//ALL SPECIFIC COMPONENTS
+.s1-loc__my-account-panel {
+  position: fixed;
+  right: 24px;
+  top: 16px;
+  z-index: 2;
+}
+
+.s1-loc__my-account-panel + .s1-md-app .md-app-container .md-app-content {
+  padding-right: 86px;
+}
