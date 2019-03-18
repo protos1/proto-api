@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="s1-loc__md-field-wrapper s1-U__width--180px">
+    <div class="s1-loc__md-field-wrapper s1-U__mg--tp16 s1-U__width--180px">
       <md-field
-        :class="{'md-invalid md-field-helper-text': $v.Ak.Form.Name.$dirty && $v.Ak.Form.Name.$invalid}"
+        :class="{'md-invalid md-field-helper-text s1-U__mg--bt32': $v.Ak.Form.Name.$dirty && $v.Ak.Form.Name.$invalid}"
       >
         <label for="Ak-Name">Client Name</label>
         <md-input
@@ -17,139 +17,152 @@
         <span class="md-error" v-if="!$v.Ak.Form.Name.required">Required field</span>
       </md-field>
     </div>
-    <div class="s1-U__mg--tp16 s1-U__mg--bt24">
-      <p class="s1-U__text-color--dark-2 s1-U__mg--bt8">APIs *</p>
-      <md-checkbox
-        class="s1-U__mg0 s1-U__mg--rt64"
+    <div class="s1-U__mg--tp16 s1-U__mg--bt16 md-layout md-gutter">
+      <p class="s1-U__text-color--dark-2 s1-U__mg--bt8 md-layout-item md-size-100">APIs *</p>
+      <div
+        class="md-layout-item md-size-25 md-xsmall-size-100 md-small-size-50 s1-U__mg--bt8"
         v-for="a in Apis"
         :key="a.Id"
-        v-model="Ak.Form.Apis"
-        :value="a.Id"
-        @change="updateScope()"
-      >{{a.Name}}</md-checkbox>
+      >
+        <md-checkbox
+          class="s1-U__mg0"
+          v-model="Ak.Form.Apis"
+          :value="a.Id"
+          @change="updateScope()"
+        >{{a.Name}}</md-checkbox>
+      </div>
     </div>
-    <div class="s1-loc__md-field-wrapper s1-U__align-children--center s1-U__width--300px">
+    <div class="s1-loc__md-field-wrapper s1-U__width--540px s1-U__mg--tp8">
       <md-field>
-        <label for="Ak-ClientId">ClientId</label>
-        <md-input
-          id="Ak-ClientId"
-          name="Ak-ClientId"
-          type="text"
-          v-model="Ak.Form.ClientId"
-          disabled
-        ></md-input>
+        <label for="Ak-Description">Description</label>
+        <md-textarea
+          id="Ak-Description"
+          name="Ak-Description"
+          md-autogrow
+          v-model="Ak.Form.Description"
+        ></md-textarea>
       </md-field>
-      <md-button
-        class="md-icon-button squared s1-U__mg--lt8"
-        style="margin-bottom: 4px"
-        @click="copyToClipboard(Ak.Form.ClientId)"
-      >
-        <md-icon>filter_none</md-icon>
-      </md-button>
     </div>
-    <div class="s1-loc__md-field-wrapper s1-U__align-children--center s1-U__width--300px">
-      <md-field>
-        <label for="Ak-ClientSecret">Client secret</label>
-        <md-input
-          id="Ak-ClientSecret"
-          name="Ak-ClientSecret"
-          type="password"
-          v-model="Ak.Form.ClientSecret"
-          disabled
-        ></md-input>
-      </md-field>
-      <md-button
-        class="md-icon-button squared s1-U__mg--lt8"
-        style="margin-bottom: 4px"
-        @click="copyToClipboard(Ak.Form.ClientSecret)"
-      >
-        <md-icon>filter_none</md-icon>
-      </md-button>
-    </div>
-    <div class="s1-loc__md-field-wrapper s1-U__align-children--center s1-U__width--210px">
-      <md-field>
-        <label for="Ak-GrantType">GrantType</label>
-        <md-input
-          id="Ak-GrantType"
-          name="Ak-GrantType"
-          type="text"
-          v-model="Ak.Form.GrantType"
-          disabled
-        ></md-input>
-      </md-field>
-      <md-button
-        class="md-icon-button squared s1-U__mg--lt8"
-        style="margin-bottom: 4px"
-        @click="copyToClipboard(Ak.Form.GrantType)"
-      >
-        <md-icon>filter_none</md-icon>
-      </md-button>
-    </div>
-    <div class="s1-loc__md-field-wrapper s1-U__align-children--center s1-U__width--540px">
-      <md-field>
-        <label for="Ak-TokenEndpoint">Token endpoint</label>
-        <md-input
-          id="Ak-TokenEndpoint"
-          name="Ak-TokenEndpoint"
-          type="text"
-          v-model="Ak.Form.TokenEndpoint"
-          disabled
-        ></md-input>
-      </md-field>
-      <md-button
-        class="md-icon-button squared s1-U__mg--lt8"
-        style="margin-bottom: 4px"
-        @click="copyToClipboard(Ak.Form.TokenEndpoint)"
-      >
-        <md-icon>filter_none</md-icon>
-      </md-button>
-    </div>
-    <div
-      class="s1-loc__md-field-wrapper s1-U__align-children--center"
-      :style="`width: ${Ak.Form.Apis.length > 0 ? Ak.Form.Scopes.length * 7 + 72 : 210}px; max-width: 100%`"
-    >
-      <md-field>
-        <label for="Ak-Scopes">Scopes</label>
-        <md-input
-          id="Ak-Scopes"
-          name="Ak-Scopes"
-          type="text"
-          placeholder="No API selected"
-          v-model="Ak.Form.Scopes"
-          disabled
-        ></md-input>
-      </md-field>
-      <md-button
-        class="md-icon-button squared s1-U__mg--lt8"
-        style="margin-bottom: 4px"
-        @click="copyToClipboard(Ak.Form.Scopes)"
-        v-show="Ak.Form.Apis.length > 0"
-      >
-        <md-icon>filter_none</md-icon>
-      </md-button>
-    </div>
-    <div class="s1-U__mg--tp8 s1-U__mg--bt24">
-      <p class="s1-U__text-color--dark-2 s1-U__mg--bt8">Summary</p>
-      <div
-        class="s1-U__border-solid--1 s1-U__bg-color--body-bg s1-U__pd16 s1-U__pd--tp8 s1-U__pd--bt8 s1-U__align-children--center s1-U__width--540px"
-      >
-        <p
-          style="word-break: break-word;"
-        >{{Ak.Form.Apis.length > 0 ? formatConcat() : 'No API selected'}}</p>
+    <div class="s1-U__border--top1 s1-U__mg--tp32 s1-U__mg--bt32"></div>
+
+    <div class="s1-U__align-children--center s1-U__flex-wrap s1-U__mg--bt8">
+      <h4 class="s1-U__width--144px s1-U__flex-shrink-0">Client ID</h4>
+      <div class="s1-U__align-children--center" style="min-width: 70%">
+        <h5 class="s1-U__text-color--dark-2" style="word-break: break-word">{{ Ak.Form.ClientId }}</h5>
         <md-button
-          class="md-icon-button squared s1-U__mg--lt8"
-          @click="copyToClipboard(formatConcat())"
-          v-show="Ak.Form.Apis.length > 0"
+          class="md-icon-button squared md-dense s1-U__mg--lt8"
+          style="margin-bottom: 4px"
+          @click="copyToClipboard(Ak.Form.ClientId)"
         >
-          <md-icon>filter_none</md-icon>
+          <md-icon>
+            <span>filter_none</span>
+          </md-icon>
+          <md-tooltip md-direction="right">Copy</md-tooltip>
         </md-button>
       </div>
     </div>
-    <div class="s1-loc__md-field-wrapper s1-U__width--540px">
-      <md-field>
-        <label for="Ak-Description">Description</label>
-        <md-textarea id="Ak-Description" name="Ak-Description" v-model="Ak.Form.Description"></md-textarea>
-      </md-field>
+    <div class="s1-U__align-children--center s1-U__flex-wrap s1-U__mg--bt8">
+      <h4 class="s1-U__width--144px s1-U__flex-shrink-0">Client secret</h4>
+      <div class="s1-U__align-children--center" style="min-width: 70%">
+        <h5
+          class="s1-U__text-color--dark-2"
+          style="word-break: break-word"
+        >{{ showSecret ? Ak.Form.ClientSecret : '*************' }}</h5>
+        <md-button
+          class="md-icon-button squared md-dense s1-U__mg--lt8"
+          style="margin-bottom: 4px"
+          @click="showSecret = !showSecret"
+        >
+          <md-icon>
+            <span>{{ showSecret ? 'visibility_off' : 'visibility' }}</span>
+          </md-icon>
+          <md-tooltip
+            md-direction="left"
+          >{{ showSecret ? 'hide client secret' : 'show client secret' }}</md-tooltip>
+        </md-button>
+        <md-button
+          class="md-icon-button squared md-dense s1-U__mg--lt8"
+          style="margin-bottom: 4px"
+          @click="copyToClipboard(Ak.Form.ClientSecret)"
+        >
+          <md-icon>
+            <span>filter_none</span>
+          </md-icon>
+          <md-tooltip md-direction="right">Copy</md-tooltip>
+        </md-button>
+      </div>
+    </div>
+    <div class="s1-U__align-children--center s1-U__flex-wrap s1-U__mg--bt8">
+      <h4 class="s1-U__width--144px s1-U__flex-shrink-0">Grant type</h4>
+      <div class="s1-U__align-children--center" style="min-width: 70%">
+        <h5 class="s1-U__text-color--dark-2" style="word-break: break-word">{{ Ak.Form.GrantType }}</h5>
+        <md-button
+          class="md-icon-button squared md-dense s1-U__mg--lt8"
+          style="margin-bottom: 4px"
+          @click="copyToClipboard(Ak.Form.GrantType)"
+        >
+          <md-icon>
+            <span>filter_none</span>
+          </md-icon>
+          <md-tooltip md-direction="right">Copy</md-tooltip>
+        </md-button>
+      </div>
+    </div>
+    <div class="s1-U__align-children--center s1-U__flex-wrap s1-U__mg--bt8">
+      <h4 class="s1-U__width--144px s1-U__flex-shrink-0">Token Endpoint</h4>
+      <div class="s1-U__align-children--center" style="min-width: 70%">
+        <h5
+          class="s1-U__text-color--dark-2"
+          style="word-break: break-word"
+        >{{ Ak.Form.TokenEndpoint }}</h5>
+        <md-button
+          class="md-icon-button squared md-dense s1-U__mg--lt8"
+          style="margin-bottom: 4px"
+          @click="copyToClipboard(Ak.Form.TokenEndpoint)"
+        >
+          <md-icon>
+            <span>filter_none</span>
+          </md-icon>
+          <md-tooltip md-direction="right">Copy</md-tooltip>
+        </md-button>
+      </div>
+    </div>
+    <div class="s1-U__align-children--center s1-U__flex-wrap s1-U__mg--bt8">
+      <h4 class="s1-U__width--144px s1-U__flex-shrink-0">Scopes</h4>
+      <div class="s1-U__align-children--center" style="min-width: 70%">
+        <h5 class="s1-U__text-color--dark-2" style="word-break: break-word">{{ Ak.Form.Scopes }}</h5>
+        <md-button
+          class="md-icon-button squared md-dense s1-U__mg--lt8"
+          style="margin-bottom: 4px"
+          @click="copyToClipboard(Ak.Form.Scopes)"
+          v-show="Ak.Form.Apis.length > 0"
+        >
+          <md-icon>
+            <span>filter_none</span>
+          </md-icon>
+          <md-tooltip md-direction="right">Copy</md-tooltip>
+        </md-button>
+      </div>
+    </div>
+    <div
+      class="s1-U__align-children--center s1-U__pd8 s1-U__border-solid--1 s1-U__bg-color--body-bg s1-U__border-radius--2px s1-U__mg--tp16"
+      style="justify-content: center;"
+      v-show="Ak.Form.Apis.length > 0"
+    >
+      <h5
+        class="s1-U__text-color--dark-2"
+        style="word-break: break-word;"
+      >{{Ak.Form.Apis.length > 0 ? formatConcat() : 'No API selected'}}</h5>
+
+      <md-button
+        class="md-icon-button squared md-dense s1-U__mg--lt8"
+        @click="copyToClipboard(formatConcat())"
+      >
+        <md-icon>
+          <span>filter_none</span>
+        </md-icon>
+        <md-tooltip md-direction="right">Copy</md-tooltip>
+      </md-button>
     </div>
   </div>
 </template>
@@ -160,7 +173,8 @@ import Apis from "../../data/Apis.js";
 export default {
   name: "AkForm",
   data: () => ({
-    Apis
+    Apis,
+    showSecret: false
   }),
   props: {
     Ak: Object,

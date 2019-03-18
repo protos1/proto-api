@@ -29,7 +29,7 @@
           </md-list-item>
         </md-list>
       </md-app-drawer>
-      <md-app-content class="s1-loc__body-bg">
+      <md-app-content class="s1-loc__body-bg s1-U__pd--tp0">
         <Ak
           v-if="Page.Current === 'Ak'"
           :StoreData="StoreData"

@@ -15,8 +15,23 @@ export default [
     Scope: "insuranceService.api"
   },
   {
-    Id: "18w9a89wy8s9",
-    Name: "Sales",
-    Scope: "salesService.api"
+    Id: "18w91238s9",
+    Name: "Notify",
+    Scope: "notifyService.api"
+  },
+  {
+    Id: "1811wy8s9",
+    Name: "Sales v4",
+    Scope: "salesService4.api"
+  },
+  {
+    Id: "18w9222y8s9",
+    Name: "Sales v5",
+    Scope: "salesService5.api"
+  },
+  {
+    Id: "18123123wy8s9",
+    Name: "Doom",
+    Scope: "doomService.api"
   }
 ];
