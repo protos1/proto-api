@@ -27,7 +27,7 @@
     />
 
     <!-- DETAILS -->
-    <md-dialog :md-active.sync="Ak.DetailInterface">
+    <md-dialog :md-active.sync="Ak.DetailInterface" :md-backdrop="false">
       <header
         class="s1-U__pd--tp8 s1-U__pd--bt8 s1-U__pd--lt24 s1-U__pd--rt24 s1-U__align-children--center s1-U__justify-content--space-between s1-U__flex-shrink-0 s1-U__border--bottom1"
       >

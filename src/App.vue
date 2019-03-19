@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <my-account-panel/>
+    <!-- <my-account-panel/> -->
     <md-app class="s1-md-app">
       <md-app-drawer
         class="md-xsmall-hide md-small-hide"
@@ -43,14 +43,14 @@
 </template>
 
 <script>
-import MyAccountPanel from "./components/MyAccountPanel/index";
+// import MyAccountPanel from "./components/MyAccountPanel/index";
 import Ak from "./components/Ak/Ak";
 
 export default {
   name: "App",
   components: {
-    Ak,
-    MyAccountPanel
+    Ak
+    // MyAccountPanel
   },
   data: () => ({
     Page: {
