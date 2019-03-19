@@ -1,6 +1,6 @@
 <template>
   <section class="s1-U__width--900px" style="margin: 0 auto;">
-    <header class="s1-U__mg--bt32 s1-U__mg--tp32">
+    <header class="s1-U__pd--bt32 s1-U__pd--tp32">
       <p
         class="md-caption s1-U__mg--lt48 s1-U__pd--lt4"
         v-if="Ak.Form.Id"
@@ -21,7 +21,7 @@
       >
         <md-progress-spinner md-mode="indeterminate"></md-progress-spinner>
       </div>
-      <md-content class="md-scrollbar s1-U__pd16 s1-U__pd--lt48" style="overflow: auto">
+      <md-content class="md-scrollbar s1-U__pd16 s1-loc__form-card-wrapper" style="overflow: auto">
         <ak-form :StoreData="StoreData" :updateScope="updateScope" :Ak="Ak" :$v="$v"></ak-form>
       </md-content>
       <md-card-actions class="s1-U__pd16 s1-U__border--top1 s1-U__flex-shrink-0">

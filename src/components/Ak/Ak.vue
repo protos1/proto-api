@@ -1,9 +1,9 @@
 <template>
   <div id="Ak">
     <!-- MOCK -->
-    <div class="s1-prop__auto-gen">
+    <div class="s1-prop__auto-gen" style="left: 70px; top: 0; bottom: auto">
       <md-button class="md-primary md-icon-button squared" @click="setMockData('Ak');">
-        <md-icon>person</md-icon>
+        <md-icon>add</md-icon>
       </md-button>
     </div>
 
@@ -16,20 +16,36 @@
     </div>
 
     <!-- CONTENT -->
-    <Ak-content
+    <ak-content
       :StoreData="StoreData"
       :Ak="Ak"
       :create="create"
       :edit="edit"
+      :detail="detail"
       :remove="remove"
       v-if="!Ak.CreatingInterface && !Ak.EditingInterface"
     />
 
     <!-- DETAILS -->
-    <section class="s1-U__width--900px" style="margin: 0 auto;" v-if="Ak.DetailInterface"></section>
+    <md-dialog :md-active.sync="Ak.DetailInterface">
+      <header
+        class="s1-U__pd--tp8 s1-U__pd--bt8 s1-U__pd--lt24 s1-U__pd--rt24 s1-U__align-children--center s1-U__justify-content--space-between s1-U__flex-shrink-0 s1-U__border--bottom1"
+      >
+        <h2 class="md-title">{{Ak.Detailed && Ak.Detailed.Name}}</h2>
+        <md-button class="md-icon-button squared" @click="closeDetail('Ak')">
+          <md-icon>close</md-icon>
+        </md-button>
+      </header>
+      <md-dialog-content
+        class="s1-U__pd--lt24 s1-U__pd--rt24 s1-U__pd--tp16 s1-U__pd--bt16"
+        v-if="Ak.DetailInterface"
+      >
+        <ak-detail :Ak="Ak"></ak-detail>
+      </md-dialog-content>
+    </md-dialog>
 
     <!-- CREATING -->
-    <Ak-creating
+    <ak-creating
       :StoreData="StoreData"
       :Ak="Ak"
       :$v="$v"
@@ -41,7 +57,7 @@
     />
 
     <!-- EDITING -->
-    <Ak-editing
+    <ak-editing
       :StoreData="StoreData"
       :Ak="Ak"
       :$v="$v"
@@ -104,6 +120,7 @@ import Apis from "../../data/Apis.js";
 import AkContent from "./AkContent.vue";
 import AkCreating from "./AkCreating.vue";
 import AkEditing from "./AkEditing.vue";
+import AkDetail from "./AkDetail.vue";
 import { getPropById, randomString } from "../../assets/utils";
 
 export default {
@@ -118,7 +135,8 @@ export default {
   components: {
     AkContent,
     AkCreating,
-    AkEditing
+    AkEditing,
+    AkDetail
   },
   data: () => ({
     Ak: {
@@ -161,7 +179,9 @@ export default {
         Id: null,
         Title: null,
         Content: null
-      }
+      },
+      Detailed: null,
+      DetailInterface: false
     }
   }),
   methods: {

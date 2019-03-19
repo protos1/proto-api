@@ -116,6 +116,14 @@ export default {
         self.updateStoreData(entityName, self[entityName].Data);
         self.$forceUpdate();
       }, 1200);
+    },
+    detail(entityName, obj) {
+      this[entityName].Detailed = _.cloneDeep(obj);
+      this[entityName].DetailInterface = true;
+    },
+    closeDetail(entityName) {
+      this[entityName].DetailInterface = false;
+      this[entityName].Detailed = null;
     }
   }
 };
