@@ -11,8 +11,8 @@ export default {
   methods: {
     setMockData(entityName) {
       this[entityName].Data = [
-        ...this[entityName].Data,
-        ...this[entityName].MockData
+        ..._.cloneDeep(this[entityName].Data),
+        ..._.cloneDeep(this[entityName].MockData)
       ];
       this.updateStoreData(entityName, this[entityName].Data);
     },
@@ -31,7 +31,7 @@ export default {
     },
     edit(entityName, id, idToFocus = null) {
       this[entityName].Form = {
-        ...U.getObjByProp(this[entityName].Data, id, "Id")
+        ..._.cloneDeep(U.getObjByProp(this[entityName].Data, id, "Id"))
       };
       this[entityName].EditingInterface = true;
 
@@ -64,7 +64,7 @@ export default {
       };
     },
     removeItem(entityName, id) {
-      this[entityName].Data = this[entityName].Data.filter(
+      this[entityName].Data = _.cloneDeep(this[entityName].Data).filter(
         item => item.Id !== id
       );
       this[entityName].SuccessFeedbackDeletion = true;
